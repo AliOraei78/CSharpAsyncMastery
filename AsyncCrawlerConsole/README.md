@@ -32,4 +32,11 @@ A console application demonstrating deep understanding of asynchronous programmi
 - Deadlock scenario demonstration and prevention
 - Best practice: Use ConfigureAwait(false) in library code
 
+## CancellationToken
+
+- CancellationTokenSource and Token usage.
+- Cancelable HttpClient operations.
+- Cancelling Task.WhenAll group.
+- Graceful cancellation with OperationCanceledException handling.
+
 ## Project Structure

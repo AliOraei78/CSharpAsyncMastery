@@ -31,7 +31,7 @@ public static class ParallelDownloader
         }
     }
 
-    public static async Task DownloadLimitedParallelAdync(List<string> urls, int maxConcurren  = 10)
+    public static async Task DownloadLimitedParallelAsync(List<string> urls, int maxConcurren  = 10)
     {
         var stopwatch = Stopwatch.StartNew();
         var semaphore = new SemaphoreSlim(maxConcurren);
