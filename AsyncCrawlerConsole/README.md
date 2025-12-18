@@ -25,4 +25,11 @@ A console application demonstrating deep understanding of asynchronous programmi
 - Parallel download using Task.WhenAll (~2-5 seconds).
 - Concurrency limit with SemaphoreSlim (real-world best practice).
 
+## ConfigureAwait & SynchronizationContext
+
+- ConfigureAwait(true) vs ConfigureAwait(false)
+- Context capture in UI apps (WinForms/WPF)
+- Deadlock scenario demonstration and prevention
+- Best practice: Use ConfigureAwait(false) in library code
+
 ## Project Structure
