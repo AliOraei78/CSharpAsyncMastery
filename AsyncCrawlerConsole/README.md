@@ -19,4 +19,10 @@ A console application demonstrating deep understanding of asynchronous programmi
 - Custom delay and timeout patterns.
 - Combination of I/O and CPU work.
 
+## Parallel Async with WhenAll
+
+- Sequential download of 100 delayed pages (~100 seconds).
+- Parallel download using Task.WhenAll (~2-5 seconds).
+- Concurrency limit with SemaphoreSlim (real-world best practice).
+
 ## Project Structure
