@@ -53,11 +53,43 @@
         Console.WriteLine("\nWill cancell after 5 seconds...");
         cts.Cancel();
         await task;
-                */
-
         var downloader = new AsyncDownloader();
         string result = await downloader.DownloadPageWithTimeoutAsync("https://httpbin.org/delay/10", TimeSpan.FromSeconds(3));
         Console.WriteLine(result);
+        string result = await RetryDownloader.DownloadWithRetryAsync("https://httpbin.org/delay/10", maxRetries: 3, timeout: TimeSpan.FromSeconds(2));
+        Console.WriteLine(result);
+        string result = await ResilientDownloader.DownloadWithTimeoutAndRetryAsync(
+        "https://httpbin.org/delay/10",
+        maxRetries: 4,
+        timeout: TimeSpan.FromSeconds(2));
+
+        Console.WriteLine(result);
+                */
+        Console.WriteLine("=== Testing the Resilient Downloader with a problematic page ===\n");
+
+        // Page with a long delay (8 seconds) + 2-second timeout + 4 retries
+        string result1 = await ResilientDownloader.DownloadWithTimeoutAndRetryAsync(
+            "https://httpbin.org/delay/8",
+            maxRetries: 4,
+            timeout: TimeSpan.FromSeconds(2));
+
+        Console.WriteLine($"\nResult of the long page: {result1}\n");
+
+        // Page with a 500 error (the server returns an error)
+        string result2 = await ResilientDownloader.DownloadWithTimeoutAndRetryAsync(
+            "https://httpbin.org/status/500",
+            maxRetries: 3,
+            timeout: TimeSpan.FromSeconds(5));
+
+        Console.WriteLine($"\nResult of the error page: {result2}\n");
+
+        // Good page
+        string result3 = await ResilientDownloader.DownloadWithTimeoutAndRetryAsync(
+            "https://httpbin.org/html",
+            maxRetries: 1,
+            timeout: TimeSpan.FromSeconds(10));
+
+        Console.WriteLine($"\nResult of the good page: content length {result3.Length} characters");
 
         Console.ReadKey();
     }

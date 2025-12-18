@@ -39,4 +39,11 @@ A console application demonstrating deep understanding of asynchronous programmi
 - Cancelling Task.WhenAll group.
 - Graceful cancellation with OperationCanceledException handling.
 
+## Timeout & Retry
+
+- Timeout with CancellationTokenSource(timeout)
+- Simple retry loop for transient failures
+- Combined timeout + retry for resilient downloads
+- Real-world reliability pattern
+
 ## Project Structure
