@@ -64,7 +64,6 @@
         timeout: TimeSpan.FromSeconds(2));
 
         Console.WriteLine(result);
-                */
         Console.WriteLine("=== Testing the Resilient Downloader with a problematic page ===\n");
 
         // Page with a long delay (8 seconds) + 2-second timeout + 4 retries
@@ -90,7 +89,78 @@
             timeout: TimeSpan.FromSeconds(10));
 
         Console.WriteLine($"\nResult of the good page: content length {result3.Length} characters");
+        Console.WriteLine("=== Simple Async Stream ===");
+
+        await foreach (var number in AsyncStreamDemo.GenerateNumebrsAsync(20, 300))
+        {
+            Console.WriteLine($"Received: {number}");
+        }        
+        Console.WriteLine("=== Async Stream for extracting links ===");
+
+        await foreach (var link in AsyncLinkExtractor.ExtractLinksAsync(
+            "https://en.wikipedia.org/wiki/.NET",
+            delayMs: 200))
+        {
+            Console.WriteLine($"Link received: {link}");
+        } 
+            Console.WriteLine("=== Consuming Async Stream with CancellationToken ===");
+
+        var cts = new CancellationTokenSource();
+
+        // Start the operation
+        var streamTask = ConsumeLinksAsync("https://en.wikipedia.org/wiki/.NET", cts.Token);
+
+        // Cancel after 5 seconds
+        await Task.Delay(5000);
+        Console.WriteLine("\nCancellation requested after 5 seconds...");
+        cts.Cancel();
+
+        try
+        {
+            await streamTask;
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("Stream was cancelled!");
+        }
+         */
+
+        Console.WriteLine("=== Consuming Async Stream with CancellationToken ===");
+
+        var cts = new CancellationTokenSource();
+
+        // Start the operation
+        var streamTask = ConsumeLinksWithCancellationAsync("https://en.wikipedia.org/wiki/.NET", cts.Token);
+
+        // Cancel after 5 seconds
+        await Task.Delay(5000);
+        Console.WriteLine("\nCancellation requested after 5 seconds...");
+        cts.Cancel();
+
+        try
+        {
+            await streamTask;
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("Stream was cancelled!");
+        }
 
         Console.ReadKey();
+    }
+
+    static async Task ConsumeLinksWithCancellationAsync(string url, CancellationToken cancellationToken)
+    {
+        Console.WriteLine($"Starting consumption of links from {url}");
+
+        await foreach (var link in AsyncLinkExtractor.ExtractLinksAsync(
+            url,
+            delayMs: 300,
+            cancellationToken))
+        {
+            Console.WriteLine($"Consumed: {link}");
+        }
+
+        Console.WriteLine("All links have been consumed.");
     }
 }

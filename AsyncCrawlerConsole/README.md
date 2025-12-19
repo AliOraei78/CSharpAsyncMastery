@@ -46,4 +46,11 @@ A console application demonstrating deep understanding of asynchronous programmi
 - Combined timeout + retry for resilient downloads
 - Real-world reliability pattern
 
+## Async Streams (IAsyncEnumerable)
+
+- Producing async streams with yield return
+- Consuming with await foreach
+- Parsing links from HTML asynchronously
+- Cancellation support in streams
+
 ## Project Structure
