@@ -59,7 +59,7 @@ public class WebCrawler
                         {
                             visited.Add(link);
                             queue.Enqueue(link);
-                            Console.WriteLine($"  → New link added: {link}");
+                            Console.WriteLine($"   New link added: {link}");
                         }
                     }
                 }
