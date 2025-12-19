@@ -53,4 +53,12 @@ A console application demonstrating deep understanding of asynchronous programmi
 - Parsing links from HTML asynchronously
 - Cancellation support in streams
 
+## Full Async Web Crawler
+
+- Parallel crawling of 1000 pages
+- Async stream for link extraction
+- Concurrency limit with SemaphoreSlim
+- Per-page timeout and global cancellation
+- Thread-safe queue for discovered URLs
+
 ## Project Structure

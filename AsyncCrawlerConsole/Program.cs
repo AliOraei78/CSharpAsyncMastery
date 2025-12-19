@@ -123,8 +123,6 @@
         {
             Console.WriteLine("Stream was cancelled!");
         }
-         */
-
         Console.WriteLine("=== Consuming Async Stream with CancellationToken ===");
 
         var cts = new CancellationTokenSource();
@@ -144,6 +142,32 @@
         catch (OperationCanceledException)
         {
             Console.WriteLine("Stream was cancelled!");
+        }
+         */
+
+        var crawler = new WebCrawler(maxConcurrent: 15, timeoutPerPage: TimeSpan.FromSeconds(10));
+
+        var cts = new CancellationTokenSource();
+
+        Console.WriteLine("Crawler started from https://en.wikipedia.org/wiki/.NET (max 200 pages)");
+
+        var crawlTask = crawler.StartAsync(
+            "https://en.wikipedia.org/wiki/.NET",
+            maxPages: 200,
+            cts.Token);
+
+        // Cancel after 30 seconds (for testing)
+        await Task.Delay(30000);
+        Console.WriteLine("\nCancelling the crawler after 30 seconds...");
+        cts.Cancel();
+
+        try
+        {
+            await crawlTask;
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("Crawler was successfully cancelled.");
         }
 
         Console.ReadKey();
