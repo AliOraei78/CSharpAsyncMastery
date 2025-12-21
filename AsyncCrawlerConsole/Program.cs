@@ -11,13 +11,15 @@
         Console.WriteLine($"First 5 urls: ");
         foreach ( var url in urls ) 
             Console.WriteLine( url );
-        
+        */
+        /*
         var urls = UrlGenerator.GetDelayedUrls(100);
 
         await SequentialDownloader.DownloadSequentiallyAsync( urls );
         await ParallelDownloader.DownloadParallelAsync( urls );
         await ParallelDownloader.DownloadLimitedParallelAsync( urls, maxConcurren: 10 );
-
+        */
+        /*
         Console.WriteLine("=== ConfigureAwait Test in Console App ===");
         await ConfigureAwaitDemo.RunWithConfigureAwaitTrueAsync();
         Console.WriteLine("----------");
@@ -46,6 +48,8 @@
         {
             Console.WriteLine("Cancelled because of exception");
         }
+        */
+        /*
         var urls = UrlGenerator.GetDelayedUrls(50);
         var cts = new CancellationTokenSource();
         var task = ParallelCancellationDownloader.DownloadParallelWithCancellationAsync(urls, cts.Token);
@@ -56,14 +60,16 @@
         var downloader = new AsyncDownloader();
         string result = await downloader.DownloadPageWithTimeoutAsync("https://httpbin.org/delay/10", TimeSpan.FromSeconds(3));
         Console.WriteLine(result);
-        string result = await RetryDownloader.DownloadWithRetryAsync("https://httpbin.org/delay/10", maxRetries: 3, timeout: TimeSpan.FromSeconds(2));
+        result = await RetryDownloader.DownloadWithRetryAsync("https://httpbin.org/delay/10", maxRetries: 3, timeout: TimeSpan.FromSeconds(2));
         Console.WriteLine(result);
-        string result = await ResilientDownloader.DownloadWithTimeoutAndRetryAsync(
+        result = await ResilientDownloader.DownloadWithTimeoutAndRetryAsync(
         "https://httpbin.org/delay/10",
         maxRetries: 4,
         timeout: TimeSpan.FromSeconds(2));
 
         Console.WriteLine(result);
+        */
+        /*
         Console.WriteLine("=== Testing the Resilient Downloader with a problematic page ===\n");
 
         // Page with a long delay (8 seconds) + 2-second timeout + 4 retries
@@ -94,7 +100,9 @@
         await foreach (var number in AsyncStreamDemo.GenerateNumebrsAsync(20, 300))
         {
             Console.WriteLine($"Received: {number}");
-        }        
+        } 
+        */
+        /*
         Console.WriteLine("=== Async Stream for extracting links ===");
 
         await foreach (var link in AsyncLinkExtractor.ExtractLinksAsync(
@@ -103,7 +111,9 @@
         {
             Console.WriteLine($"Link received: {link}");
         } 
-            Console.WriteLine("=== Consuming Async Stream with CancellationToken ===");
+            */
+        /*
+        Console.WriteLine("=== Consuming Async Stream with CancellationToken ===");
 
         var cts = new CancellationTokenSource();
 
@@ -123,6 +133,8 @@
         {
             Console.WriteLine("Stream was cancelled!");
         }
+        */
+        /*
         Console.WriteLine("=== Consuming Async Stream with CancellationToken ===");
 
         var cts = new CancellationTokenSource();
@@ -145,7 +157,7 @@
         }
          */
 
-        var crawler = new WebCrawler(maxConcurrent: 15, timeoutPerPage: TimeSpan.FromSeconds(10));
+       var crawler = new WebCrawler(maxConcurrent: 15, timeoutPerPage: TimeSpan.FromSeconds(10));
 
         var cts = new CancellationTokenSource();
 
@@ -169,7 +181,7 @@
         {
             Console.WriteLine("Crawler was successfully cancelled.");
         }
-
+       
         Console.ReadKey();
     }
 
