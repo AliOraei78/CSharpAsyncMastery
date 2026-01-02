@@ -5,13 +5,13 @@ A console application demonstrating deep understanding of asynchronous programmi
 ## Async/Await Fundamentals & Task Basics
 
 ### Features Demonstrated
-- **Async/Await syntax** – Proper use of `async Task` and `await`.
-- **HttpClient** – Reusable instance with User-Agent header.
-- **Basic async operations** – Single page download, sequential downloads, delays.
-- **WhenAll** – Parallel execution of multiple downloads.
-- **ValueTask** – Example of lightweight async return.
-- **Fire-and-forget** – Demonstration (with caution note).
-- **CPU-bound work** – Offloading to ThreadPool with `Task.Run`.
+- **Async/Await syntax** â€“ Proper use of `async Task` and `await`.
+- **HttpClient** â€“ Reusable instance with User-Agent header.
+- **Basic async operations** â€“ Single page download, sequential downloads, delays.
+- **WhenAll** â€“ Parallel execution of multiple downloads.
+- **ValueTask** â€“ Example of lightweight async return.
+- **Fire-and-forget** â€“ Demonstration (with caution note).
+- **CPU-bound work** â€“ Offloading to ThreadPool with `Task.Run`.
 
 ### Key Examples
 - Single page download with error handling.
@@ -60,5 +60,3 @@ A console application demonstrating deep understanding of asynchronous programmi
 - Concurrency limit with SemaphoreSlim
 - Per-page timeout and global cancellation
 - Thread-safe queue for discovered URLs
-
-## Project Structure
